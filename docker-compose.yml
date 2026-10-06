@@ -1,0 +1,28 @@
+services:
+  secret-share:
+    build: .
+    container_name: secret-share
+    restart: unless-stopped
+    volumes:
+      - secret-data:/data
+    # No published ports: the reverse proxy reaches this container over the
+    # shared Docker network below as http://secret-share:8000
+    networks:
+      - proxy
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  secret-data:
+
+networks:
+  proxy:
+    external: true
+    # Set this to the network your nginx-proxy-manager container is on
+    # (check with: docker network ls). Change the name here if it differs.
+    name: proxy

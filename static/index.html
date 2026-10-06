@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ephemeral Secret Share</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Ephemeral Secret Share</h1>
+
+    <section id="create-view" hidden>
+      <p class="sub">Paste a secret. You get a link that self-destructs after it's opened the number of times you choose.</p>
+      <textarea id="secret" rows="7" maxlength="20000" placeholder="Password, API key, note..."></textarea>
+      <div class="row">
+        <label for="ttl">Expires after</label>
+        <select id="ttl">
+          <option value="1h">1 hour</option>
+          <option value="24h" selected>24 hours</option>
+          <option value="7d">7 days</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="views">Can be opened</label>
+        <select id="views">
+          <option value="1" selected>1 time</option>
+          <option value="2">2 times</option>
+          <option value="3">3 times</option>
+          <option value="4">4 times</option>
+          <option value="5">5 times</option>
+        </select>
+      </div>
+      <button id="create-btn">Create secret link</button>
+      <p id="create-error" class="error" hidden></p>
+    </section>
+
+    <section id="link-view" hidden>
+      <p class="sub">Share this link. It works <strong id="views-count">once</strong>, then it's gone (or sooner if it expires).</p>
+      <input id="link" type="text" readonly>
+      <button id="copy-btn">Copy link</button>
+      <button id="another-btn" class="secondary">Create another</button>
+    </section>
+
+    <section id="reveal-view" hidden>
+      <p class="sub">Someone shared a secret with you. Revealing it uses up one of its limited views.</p>
+      <button id="reveal-btn">Reveal secret</button>
+    </section>
+
+    <section id="secret-view" hidden>
+      <p class="sub" id="remaining-note">Copy it now.</p>
+      <pre id="secret-out"></pre>
+      <button id="copy-secret-btn">Copy secret</button>
+    </section>
+
+    <section id="gone-view" hidden>
+      <p class="sub error">This secret doesn't exist, has expired, or was already viewed.</p>
+      <a href="/">Create a new secret</a>
+    </section>
+
+    <footer>Encrypted in your browser (AES-256-GCM). The key lives in the link's # fragment and is never sent to the server.</footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+:root {
+  --bg: #0f1419;
+  --card: #1a212b;
+  --border: #2b3644;
+  --text: #e6edf3;
+  --muted: #8b98a8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --error: #f87171;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f3f5f8;
+    --card: #ffffff;
+    --border: #d5dbe3;
+    --text: #18202a;
+    --muted: #5d6b7c;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --error: #dc2626;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+}
+h1 { margin: 0 0 8px; font-size: 1.4rem; }
+.sub { margin: 0 0 16px; color: var(--muted); }
+textarea, input[type="text"], select, pre {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+}
+textarea { resize: vertical; font-family: ui-monospace, Menlo, Consolas, monospace; }
+pre {
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  max-height: 300px;
+  overflow: auto;
+}
+.row { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
+.row label { color: var(--muted); white-space: nowrap; }
+.row select { width: auto; flex: 1; }
+button {
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+button:hover { background: var(--accent-hover); }
+button:disabled { opacity: .6; cursor: default; }
+button.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+button.secondary:hover { background: var(--bg); }
+.error { color: var(--error); }
+a { color: var(--accent); }
+footer { margin-top: 24px; font-size: .8rem; color: var(--muted); }
+[hidden] { display: none !important; }
